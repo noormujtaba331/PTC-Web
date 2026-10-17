@@ -52,7 +52,7 @@ const LoginPage = () => {
 
       {/* ===== NAVBAR ===== */}
       <div className="flex justify-between items-center px-4 sm:px-6 lg:px-10 py-3 bg-white sticky top-0 z-40 border-b">
-        <Link to="/dashboard" className="flex gap-2 items-center">
+        <Link to="/" className="flex gap-2 items-center">
           <div className="w-8 h-8 bg-blue-600 rounded-lg text-white flex items-center justify-center font-bold text-sm">SE</div>
           <div className="leading-none">
             <p className="font-bold text-sm">SE MARKETING</p>
