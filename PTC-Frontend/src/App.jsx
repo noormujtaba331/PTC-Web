@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import Dashboard from "./Customer/Dashboard";
 import ProfilePage from "./Customer/Profile";
 import MyAdsPage from "./Customer/AdsPage";
+import Assignments from './Customer/Assignments'
 import NotFound from "./pages/NotFound";
 import PlansPage from './Customer/Plans'
 import EarningsPage from './Customer/Earnings'
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/plans" element={<PlansPage />} />
           <Route path="/earnings" element={<EarningsPage />} />
+          <Route path="/assignments" element={<Assignments/>} />
           <Route path="/withdrawals" element={<WithdrawalsPage />} />
           <Route path="/support" element={<SupportPage />} />
           <Route path="*" element={<NotFound />} />
