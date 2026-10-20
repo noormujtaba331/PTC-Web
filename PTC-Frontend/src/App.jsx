@@ -1,37 +1,54 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import LandingPage from "./pages/LandingPage";
-import SignupPage from "./pages/SignupPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LandingPage from "./LandingPage/LandingPage";
+import Register from "./pages/Register";
 import LoginPage from "./pages/LoginPage";
-import Dashboard from "./Customer/Dashboard";
-import ProfilePage from "./Customer/Profile";
-import MyAdsPage from "./Customer/AdsPage";
-import NotFound from "./pages/NotFound";
-import PlansPage from './Customer/Plans'
-import EarningsPage from './Customer/Earnings'
-import WithdrawalsPage from './Customer/Withdrawals'
-import SupportPage from './Customer/Support'
+import DashboardLayout from "./Customer/DashboardLayout"; // Yeh layout hoga jisme Navbar/Sidebar fix honge
+import OverviewPage from "./Customer/Overview"; // Yeh andar ka overview page hoga
+import PlansPage from "./Customer/PlanPage";
+import VideoWorkPage from "./Customer/VideoWorkPage";
+import EarningsPage from "./Customer/EarningsPage";
+import WithdrawPage from "./Customer/WithdrawPage";
+import ProfilePage from "./Customer/ProfilePage";
+
+import AdminLogin from "./Admin/AdminLogin";
+import AdminLayout from "./Admin/AdminLayout";
+import AdminOverviewPage from "./Admin/AdminOverviewPage";
+import AdminUsersPage from "./Admin/AdminUsersPage";
+import WithdrawRequests from "./Admin/WithdrawRequest";
+
 
 const App = () => {
   return (
-    <div>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/my-ads" element={<MyAdsPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/plans" element={<PlansPage />} />
-          <Route path="/earnings" element={<EarningsPage />} />
-          <Route path="/withdrawals" element={<WithdrawalsPage />} />
-          <Route path="/support" element={<SupportPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="*" element={<div>Error 404 Page not Found</div>} />
+
+        {/* Dashboard Layout with Nested Routes */}
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route index element={<OverviewPage />} />
+          <Route path="plans" element={<PlansPage />} />
+          <Route path="video-work" element={<VideoWorkPage />} />
+          <Route path="earnings" element={<EarningsPage />} />
+          <Route path="withdraw" element={<WithdrawPage />} />
+          <Route path="profile" element={<ProfilePage />} />
+        </Route>
+
+        {/* Admin Layout with Nested Routes */}
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminOverviewPage />} />
+          <Route path="overview" element={<AdminOverviewPage />} />
+          <Route path="users" element={<AdminUsersPage />} />
+
+          <Route path="withdraw-requests" element={<WithdrawRequests />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 
