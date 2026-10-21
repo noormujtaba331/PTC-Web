@@ -54,7 +54,7 @@ async function getTodayAds(req, res) {
       return res.status(404).json({ message: "No Ads Available" });
     }
 
-    const adLimit = user.planName === "Starter Plan" ? 6 : 12;
+    const adLimit = user.planName === "Starter Plan" ? 2 : 3;
     const shuffledAds = shuffleArray(adsToday);
     const randomAdsForUser = shuffledAds.slice(0, adLimit);
 
