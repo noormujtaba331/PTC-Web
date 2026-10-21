@@ -22,8 +22,7 @@ app.use(cookieParser());
 
 // 3. Allowed origins ki list ya environment variable use karein
 const allowedOrigins = [
-  process.env.CLIENT_URL, // Vercel ya Hostinger ka URL jo aap .env mein rakhenge
-  "https://slateblue-swan-732747.hostingersite.com"
+  process.env.CLIENT_URL
 ];
 
 app.use(cors({
