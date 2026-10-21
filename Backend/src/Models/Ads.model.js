@@ -17,6 +17,10 @@ const adsSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    expiryDate: {
+        type: Date,
+        required: true // Expiry date lazmi hogi
+    },
     adStatus: {
         type: String,
         enum: ["Active", "Inactive"],
