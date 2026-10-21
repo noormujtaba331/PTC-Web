@@ -8,6 +8,9 @@ import withdrawRoutes from "./Routes/Withdraw.route.js";
 import userDetsRoutes from "./Routes/userDets.route.js";
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import dotenv from 'dotenv'; // 1. Yahan dotenv import karein
+
+dotenv.config(); // 2. Config run karein
 
 const app = express();
 
@@ -17,8 +20,21 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(cookieParser());
 
+// 3. Allowed origins ki list ya environment variable use karein
+const allowedOrigins = [
+  process.env.CLIENT_URL, // Vercel ya Hostinger ka URL jo aap .env mein rakhenge
+  "https://slateblue-swan-732747.hostingersite.com"
+];
+
 app.use(cors({
-  origin: "https://ptc-web-nu.vercel.app",
+  origin: function (origin, callback) {
+    // Agar koi tool (jaise Postman) se request aaye jiska origin na ho, toh allow kar dein
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      return callback(new Error('CORS policy violation: This origin is not allowed.'), false);
+    }
+    return callback(null, true);
+  },
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
@@ -28,6 +44,5 @@ app.use('/api/auth', authRoutes);
 app.use('/api/ads', adsRoutes);
 app.use('/api/admin', adminStatsRoutes, userDetsRoutes);
 app.use('/api/withdraw', withdrawRoutes);
-
 
 export default app;
