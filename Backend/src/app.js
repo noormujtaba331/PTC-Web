@@ -27,14 +27,7 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: function (origin, callback) {
-    // Agar koi tool (jaise Postman) se request aaye jiska origin na ho, toh allow kar dein
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      return callback(new Error('CORS policy violation: This origin is not allowed.'), false);
-    }
-    return callback(null, true);
-  },
+  origin: {allowedOrigins},
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
