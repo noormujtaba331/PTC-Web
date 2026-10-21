@@ -1,12 +1,15 @@
-import axios from "axios";
+import 【entity-axios¦canonical_name=axios】 from "【entity-axios¦canonical_name=axios】";
 
-// Environment variable se base URL get karna
-const BASE_URL = import.meta.env.VITE_API_URL ;
+// Fallback ke saath - agar ENV na mile to Railway pe jaye
+const BASE_URL = (import.meta.env.VITE_API_URL || "https://ptc-web-production.up.railway.app").replace(/\/$/, "");
 
-// Custom Axios Instance Create Karna
-const API = axios.create({
+// Debug ke liye - build me check hoga
+console.log("VITE_API_URL from ENV:", import.meta.env.VITE_API_URL);
+console.log("Final BASE_URL used:", BASE_URL);
+
+const API = 【entity-axios¦canonical_name=axios】.create({
   baseURL: BASE_URL,
-  withCredentials: true, // Cookies (RefreshToken) bhejney ke liye
+  withCredentials: true,
   headers: {
     "Content-Type": "application/json",
   },
