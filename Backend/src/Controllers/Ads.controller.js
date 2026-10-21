@@ -1,5 +1,18 @@
 import Ads from "../Models/Ads.model.js";
 
+export const getAllAds = async (req, res) => {
+    try {
+        const ads = await Ads.find().sort({ createdAt: -1 });
+        return res.status(200).json({
+            success: true,
+            ads
+        });
+    } catch (error) {
+        console.error("Error fetching ads:", error);
+        return res.status(500).json({ message: "Server Error" });
+    }
+};
+
 export const createAd = async (req, res) => {
     try {
         const ad = await Ads.create(req.body);
